@@ -1,0 +1,13 @@
+# Archivos y directorios de compilación
+bin/
+obj/
+
+# Dependencias de NuGet
+packages/
+
+# Archivos de configuración
+appsettings.Development.json
+
+# Archivos específicos de IDE
+.vscode/
+.idea/
