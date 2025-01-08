@@ -1,13 +1,13 @@
 using BackendApi.Data;
 using BackendApi.Models;
-using BackendApi.Models.DTOs; // Importar UserDto
+using BackendApi.Models.DTOs; 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackendApi.Controllers
 {
     [ApiController]
-    [Route("api/users")] // Rutas específicas para usuarios
+    [Route("api/users")] 
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -17,7 +17,6 @@ namespace BackendApi.Controllers
             _context = context;
         }
 
-        // Registrar un nuevo usuario
         [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] UserDto userDto)
         {
@@ -26,29 +25,25 @@ namespace BackendApi.Controllers
                 return BadRequest("Invalid user data.");
             }
 
-            // Verificar si ya existe un usuario con el mismo username o email
             if (_context.Users.Any(u => u.Username == userDto.Username || u.Email == userDto.Email))
             {
                 return BadRequest("Username or Email already exists.");
             }
 
-            // Crear un nuevo usuario a partir de UserDto
             var user = new User
             {
                 Name = userDto.Name,
-                Username = userDto.Username,  // Asignar el nombre de usuario
+                Username = userDto.Username,  
                 Email = userDto.Email,
-                Password = userDto.Password  // Asignar la contraseña (debería encriptarse en una aplicación real)
+                Password = userDto.Password  
             };
 
-            // Agregar el nuevo usuario a la base de datos
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "User registered successfully", user });
         }
 
-        // Obtener todos los usuarios
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
@@ -56,7 +51,6 @@ namespace BackendApi.Controllers
             return Ok(users);
         }
 
-        // Obtener un usuario por su Id
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
