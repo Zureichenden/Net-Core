@@ -7,7 +7,7 @@ namespace BackendApi.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // DbSet para la tabla 'users'
         public DbSet<User> Users { get; set; }
+        public DbSet<Article> Articles { get; set; }
     }
 }
