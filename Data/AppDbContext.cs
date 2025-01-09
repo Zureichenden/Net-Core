@@ -9,5 +9,7 @@ namespace BackendApi.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseDetail> PurchaseDetails { get; set; }
     }
 }
